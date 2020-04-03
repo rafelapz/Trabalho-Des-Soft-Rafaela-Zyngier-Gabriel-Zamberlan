@@ -94,3 +94,97 @@ while numero_de_fichas>0 and sair_do_jogo!='sim' and jogada<=3:
                      elif y==7:
                         numero_de_fichas-=fichas_apostadas
                         print('Voce perdeu {0} fichas'.format(fichas_apostadas))
+                        time.sleep(1/2)
+                        sair_do_jogo=input('Voce deseja sair do jogo? ')
+                        pass_line_bet=False
+                        come_out=True
+                        jogada+=1
+                        break
+                     elif y!=7 and y!=x:
+                        time.sleep(1/2)
+                        print('Point continua!')
+    #aposta de twelve#    
+    if twelve==True and sair_do_jogo!='sim':
+        print('Voce entrou no Twelve!')
+        time.sleep(1/2)
+        x=randint(2,12)
+        if come_out==False:
+            jogada+=1
+            come_out=True
+            print('Fase:Point')
+        elif come_out==True:
+            come_out=False
+            print('Fase:Come out')
+        time.sleep(1/2)
+        print('A soma dos dados foi {0}!'.format(x))
+        time.sleep(1/2)
+        if x==12:
+            a=30*fichas_apostadas
+            numero_de_fichas+=30*fichas_apostadas            
+            print('Voce ganhou {0} fichas!'.format(a))
+        else:
+            numero_de_fichas-=fichas_apostadas
+            print('Voce perdeu {0} fichas!'.format(fichas_apostadas))
+        time.sleep(1/2)
+        sair_do_jogo=input('Voce deseja sair do jogo? ')    
+        twelve=False 
+    #aposta de field#
+    if field==True and sair_do_jogo!='sim':
+        print('Voce entrou no Field!')
+        time.sleep(1/2)
+        x=randint(2,12)
+        if come_out==False:
+            jogada+=1
+            come_out=True
+            print('Fase:Point')
+        elif come_out==True:
+            come_out=False
+            print('Fase:Come out')
+        time.sleep(1/2)
+        print('A soma dos dados foi {0}!'.format(x))
+        time.sleep(1/2)
+        if x==5 or x==6 or x==7 or x==8:
+            numero_de_fichas-=fichas_apostadas
+            print('Voce perdeu {0} fichas!'.format(fichas_apostadas))
+        elif x==3 or x==4 or x==9 or x==10 or x==11:
+            numero_de_fichas+=fichas_apostadas
+            print('Voce ganhou {0} fichas!'.format(fichas_apostadas))
+        elif x==2:
+            m=2*fichas_apostadas
+            numero_de_fichas+=2*fichas_apostadas
+            print('Voce ganhou {0} fichas!'.format(m))
+        elif x==12:
+            t=3*fichas_apostadas
+            numero_de_fichas+=3*fichas_apostadas
+            print('Voce ganhou {0} fichas!'.format(t))
+        time.sleep(1/2)
+        sair_do_jogo=input('Voce deseja sair do jogo? ')
+        field=False   
+    #aposta de any craps#
+    if any_craps==True and sair_do_jogo!='sim':
+        print('Voce entrou no Any Craps!')
+        time.sleep(1/2)
+        x=randint(2,12)
+        if come_out==False:
+            jogada+=1
+            come_out=True
+            print('Fase:Point')
+        elif come_out==True:
+            come_out=False
+            print('Fase:Come out')
+            time.sleep(1/2)
+            print('Você entrou no Any Craps!')
+        time.sleep(1/2)
+        print('A soma dos dados foi {0}!'.format(x))
+        if x==2 or x==3 or x==12:
+            s=7*fichas_apostadas
+            numero_de_fichas+=7*fichas_apostadas
+            print('Voce ganhou {0} fichas!'.format(s))
+        else:
+            numero_de_fichas-=fichas_apostadas
+            print('Voce perdeu {0} fichas!'.format(fichas_apostadas))
+            any_craps=False
+        time.sleep(1/2)
+        sair_do_jogo=input('Voce deseja sair do jogo? ') 
+#quando sai do while, fim do jogo#            
+print('Voce acabou o jogo com {0} fichas!'.format(numero_de_fichas))
