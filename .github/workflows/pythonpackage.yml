@@ -1,0 +1,96 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+numero_de_fichas=int(input('Quantas fichas voce tem?   '))
+from random import randint
+import time
+time.sleep(1/2)
+print('O jogo comecou!')
+come_out=True
+any_craps=False
+twelve=False
+pass_line_bet=False
+field=False
+time.sleep(1/2)
+x=randint(2,12)
+time.sleep(1/2)
+sair_do_jogo='nao'
+jogada=0 
+while numero_de_fichas>0 and sair_do_jogo!='sim' and jogada<=3:
+#perguntando se o jogador quer jogar e o que ele quer jogar#
+    if any_craps!=True and field!=True and pass_line_bet!=True and twelve!=True:
+        jogo=input('O que voce quer jogar?   ' )
+        time.sleep(1/2)
+        fichas_apostadas=int(input('Quantas fichas voce quer apostar? '))
+            #impedindo um jogador de apostar 0 fichas#
+        if fichas_apostadas==0 or fichas_apostadas>numero_de_fichas:
+            print('Voce esta fora!')
+            break
+        while any_craps==False and twelve==False and pass_line_bet==False and field==False:
+                while jogo=='pass line bet' and come_out==False:
+                    print('Nao pode jogar Pass Line Bet na Fase Point')
+                    jogo=input('O que voce quer jogar?   ' )
+                if jogo=='any craps':
+                     any_craps=True
+                     break
+                elif jogo=='twelve':
+                    twelve=True 
+                    break
+                elif jogo=='pass line bet' and come_out==True:
+                    pass_line_bet=True
+                    break
+                elif jogo=='field':
+                    field=True
+                    break
+    #jogo de pass_line_bet. X é o resultado da soma dos dados#
+    if pass_line_bet==True and sair_do_jogo!='sim':
+         print('Fase:Come Out')
+         time.sleep(1/2)
+         print('Voce entrou no Pass Line Bet')
+         time.sleep(1/2)
+         print('A soma dos dados foi {0}!'.format(x))
+         time.sleep(1/2)
+        #O jogo Come out#
+         if x==7 or x==11:
+             numero_de_fichas+=fichas_apostadas
+             time.sleep(1/2)
+             print('Voce ganhou {0} fichas'.format(fichas_apostadas))
+             time.sleep(1/2)
+             sair_do_jogo=input('Voce deseja sair do jogo? ')
+             time.sleep(1/2)
+             pass_line_bet=False
+             if sair_do_jogo!='sim':
+                 time.sleep(1/2)
+                 come_out=False
+         elif x==2 or x==3 or x==12:
+             numero_de_fichas-=fichas_apostadas
+             time.sleep(1/2)
+             print('Voce perdeu {0} fichas'.format(fichas_apostadas))
+             time.sleep(1/2)
+             sair_do_jogo=input('Voce deseja sair do jogo? ')
+             if sair_do_jogo!='sim':
+                 pass_line_bet=False
+                 time.sleep(1/2)
+                 come_out=False
+         elif x==4 or x==5 or x==6 or x==8 or x==9 or x==10:
+             time.sleep(1/2)
+             print('Fase: Come Out acabou!')
+             time.sleep(1)
+             print('Fase: Point!')
+             #point do pass line bet#
+             while come_out==False:
+                     time.sleep(1/2)
+                     y=randint(2,12)
+                     print('A soma dos dados foi {0}!'.format(y))
+                     time.sleep(1/2)
+                     if y==x:
+                         numero_de_fichas+=fichas_apostadas
+                         print('Voce ganhou {0} fichas'.format(fichas_apostadas))
+                         time.sleep(1/2) 
+                         come_out=True
+                         pass_line_bet=False
+                         jogada+=1
+                         sair_do_jogo=input('Voce deseja sair do jogo? ')
+                         break
+                     elif y==7:
+                        numero_de_fichas-=fichas_apostadas
+                        print('Voce perdeu {0} fichas'.format(fichas_apostadas))
